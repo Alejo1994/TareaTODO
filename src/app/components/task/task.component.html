@@ -1,0 +1,81 @@
+<div class="container">
+    <h1>Tasks</h1>
+
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputSubject">Subject</label>
+              <input type="text" class="form-control" id="inputSubject" [(ngModel)]="task.subject" name="subject">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputStartDate">Start date</label>
+              <input required type="date" class="form-control" id="inputStartDate" [(ngModel)]="task.startDate" name="startDate">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEndDate">End date</label>
+              <input required type="date" class="form-control" id="inputEndDate" [(ngModel)]="task.endDate" name="endDate">
+            </div>
+          </div>
+            <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputUser">Users</label>
+          <select [(ngModel)]="task.userId" id="inputUser" class="form-control" name="cboUsers" (click)="getNameUserSelected()">
+            <option  *ngFor="let item of users" [ngValue]="item.id">{{item.data.firstName}}</option>
+          </select>
+        </div>
+      </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputDescription">Description</label>
+            <input type="textarea" class="form-control" id="inputDescription" [(ngModel)]="task.description" name="description">
+          
+        </div>
+        </div>
+       
+        <button type="submit" class="btn btn-primary" name="btnCreateTask" id="btnCreateTask" (click)="createTask()">Save</button>
+      </form>
+    <br>
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Description</th>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col">Assigned User</th>
+        <th scope="col">State</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{task.data.subject}}</td>
+        <td>{{task.data.description}}</td>
+        <td>{{task.data.startDate | date}}</td>
+        <td>{{task.data.endDate | date}}</td>
+        <td>{{task.data.userName}}</td>
+        <td *ngIf="task.data.state">
+            <span class="badge badge-success">Active</span>
+        </td>
+        <td *ngIf="!task.data.state">
+            <span class="badge badge-danger">Inactive</span>
+        </td>
+        <td><button class="btn btn-primary" id="btnDelete" name="btnDelete" (click)="deleteTask(task.id)">Delete</button>
+        <button class="btn btn-secondary" id="btnUpdate" name="btnUpdate" (click)="updateTask(task)">Update</button>
+        <button *ngIf="task.data.state" class="btn btn-danger" id="btnDeactive" name="btnDeactive" (click)="deactiveTask(task.id, !task.data.state)">Deactive</button>
+        <button *ngIf="!task.data.state" class="btn btn-success" id="btnDeactive" name="btnDeactive" (click)="deactiveTask(task.id, !task.data.state)">Active</button></td>
+      
+      </tr>
+    
+    </tbody>
+  </table>
+</div>

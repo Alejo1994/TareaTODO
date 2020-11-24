@@ -1,0 +1,69 @@
+<div class="container">
+    <h1>Usuarios</h1>
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputId">ID</label>
+          <input *ngIf=" docId ===''" type="text" class="form-control" id="inputId" [(ngModel)]="user.Id" name="id">
+          <input  *ngIf=" docId !==''" disabled type="text" class="form-control" id="inputId" [(ngModel)]="user.Id" name="id">
+       
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" id="inputFirstName" [(ngModel)]="user.firstName" name="firstName">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputLastName">Last Name</label>
+          <input type="text" class="form-control" id="inputLastName" [(ngModel)]="user.lastName" name="lastName">
+        </div>
+    </div>
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" [(ngModel)]="user.email" name="email">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputPhoneNumber">Phone Number</label>
+        <input type="text" class="form-control" id="inputPhoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber">
+      </div>
+    </div>
+   
+    <button type="submit" class="btn btn-primary" name="btnCreateUser" id="btnCreateUser" (click)="createUser()">Save</button>
+  </form>
+<br>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.data.Id}}</td>
+        <td>{{user.data.firstName}}</td>
+        <td>{{user.data.lastName}}</td>
+        <td>{{user.data.email}}</td>
+        <td>{{user.data.phoneNumber}}</td>
+        <td><button class="btn btn-primary" id="btnDelete" name="btnDelete" (click)="deleteUser(user.id)">Delete</button></td>
+        <td><button class="btn btn-secondary" id="btnUpdate" name="btnUpdate" (click)="updateUser(user)">Update</button></td>
+      </tr>
+    
+    </tbody>
+  </table>
+</div>
